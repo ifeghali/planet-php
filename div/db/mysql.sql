@@ -27,7 +27,7 @@ CREATE TABLE `blogs` (
   `dontshowblogtitle` tinyint(4) NOT NULL default '1',
   PRIMARY KEY  (`ID`),
   UNIQUE KEY `link` (`link`)
-) TYPE=MyISAM AUTO_INCREMENT=33958;
+);
 SET character_set_client = @saved_cs_client;
 
 --
@@ -53,7 +53,7 @@ CREATE TABLE `entries` (
   UNIQUE KEY `guid` (`guid`(250)),
   KEY `rss_feed_ID` (`feedsID`),
   FULLTEXT KEY `search` (`description`,`content_encoded`,`title`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -75,7 +75,7 @@ CREATE TABLE `feeds` (
   UNIQUE KEY `rssURL` (`link`),
   KEY `blogID` (`blogsID`),
   KEY `section` (`section`)
-) TYPE=MyISAM AUTO_INCREMENT=351;
+);
 SET character_set_client = @saved_cs_client;
 
 --
@@ -88,7 +88,7 @@ SET character_set_client = utf8;
 CREATE TABLE `planet_seq` (
   `sequence` int(11) NOT NULL auto_increment,
   PRIMARY KEY  (`sequence`)
-) TYPE=MyISAM AUTO_INCREMENT=34031;
+);
 SET character_set_client = @saved_cs_client;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `submissions` (
   `state` tinyint(4) NOT NULL default '0',
   `rejectreason` text NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM AUTO_INCREMENT=612;
+);
 SET character_set_client = @saved_cs_client;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
