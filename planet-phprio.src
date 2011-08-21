@@ -1,0 +1,22 @@
+# PEAR Web Mozilla Search Tab plug-in
+# Tomas V.V.Cox <cox idecnet.com>
+
+<search
+   name="Planet PHP Rio"
+   description="Busca no Planet PHP Rio"
+   method="GET"
+   action="http://planet.phprio.org/"
+   update="http://planet.phprio.org/planet-phprio.src"
+   updateCheckDays=3
+>
+
+<input name="search" user>
+
+<interpret
+    browserResultType="result"
+    resultListStart="<!-- resultListStart -->"
+    resultListEnd="<!-- resultListEnd -->"
+    resultItemStart="<!-- resultItemStart -->"
+    resultItemEnd="<!-- resultItemEnd -->"
+>
+</search>

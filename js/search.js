@@ -9,10 +9,10 @@ function addEngine()
         if ((typeof window.sidebar == "object") && (typeof window.sidebar.addSearchEngine == "function"))
         {
             window.sidebar.addSearchEngine(
-                "http://www.planet-php.net/planet-php.src",    /* engine URL */
-                "http://www.planet-php.net/themes/img/planet-php.jpg",       /* icon URL */
-                "Planet-PHP",                                  /* engine name */
-                "Web" );                                       /* category name */
+                "planet-php.src",            /* engine URL */
+                "themes/img/planet-phprio.jpg", /* icon URL */
+                "Planet PHP Rio",               /* engine name */
+                "Web" );                        /* category name */
         }
         else
         {
