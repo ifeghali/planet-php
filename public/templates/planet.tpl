@@ -7,9 +7,9 @@
   <title>
    <?php echo PROJECT_NAME_HR; ?>
   </title>
-  <link rel="icon" href="/themes/<?php echo $BX_config['theme']; ?>/favicon.ico" type="image/x-icon" />
-  <link rel="shortcut icon" href="/themes/<?php echo $BX_config['theme']; ?>/favicon.ico" type="image/x-icon" />
-  <link href="/themes/<?php echo $BX_config['theme']; ?>/css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="theme/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="theme/favicon.ico" type="image/x-icon" />
+  <link href="theme/css/style.css" rel="stylesheet" type="text/css" />
   <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/PLANETPEAR" />
   <link rel="alternate" type="application/atom+xml" title="Atom" href="http://feeds.feedburner.com/PLANETPEAR-ATOM" />
   <link rel="outline" type="text/x-opml" title="OPML Feed list" href="/opml" />
@@ -17,7 +17,7 @@
  </head>
  <body>
   <div id="head">
-   <a href="/"><img src="/themes/planet-pear/img/pear-planet.png" width="305" height="70" hspace="30" alt="<?php echo PROJECT_NAME_HR; ?>" border="0" /></a>
+   <a href="/"><img src="theme/img/pear-planet.png" width="305" height="70" hspace="30" alt="<?php echo PROJECT_NAME_HR; ?>" border="0" /></a>
    <div id="topnavi">
     All news in one place
    </div>
@@ -90,10 +90,10 @@
 
     <fieldset>
      <legend>Links</legend>
-     <a href="#"><img border="0" alt="RSS 0.92" src="/images/rss092.gif" width="80" height="15" /></a>
-     &#160; <a href="http://feeds.feedburner.com/PLANETPEAR"><img border="0" alt="RDF 1." src="/images/rss1.gif" width="80" height="15" /></a><br />
-     <a href="http://feeds.feedburner.com/PLANETPEAR-ATOM"><img border="0" alt="Atom Feed" src="/images/atompixel.png" width="80" height="15" /></a> &#160; <br />
-     <a href="http://www.php.net/"><img border="0" alt="PHP5 powered" src="/images/phppowered.png" width="80" height="15" /></a> &#160; <a href="http://pear.php.net/"><img alt="PEAR" border="0" src="/images/pearpowered.png" width="80" height="15" /></a>
+     <a href="#"><img border="0" alt="RSS 0.92" src="images/rss092.gif" width="80" height="15" /></a>
+     &#160; <a href="http://feeds.feedburner.com/PLANETPEAR"><img border="0" alt="RDF 1." src="images/rss1.gif" width="80" height="15" /></a><br />
+     <a href="http://feeds.feedburner.com/PLANETPEAR-ATOM"><img border="0" alt="Atom Feed" src="images/atompixel.png" width="80" height="15" /></a> &#160; <br />
+     <a href="http://www.php.net/"><img border="0" alt="PHP5 powered" src="images/phppowered.png" width="80" height="15" /></a> &#160; <a href="http://pear.php.net/"><img alt="PEAR" border="0" src="images/pearpowered.png" width="80" height="15" /></a>
     </fieldset>
 
    </div>
@@ -131,7 +131,7 @@
      </div>
     </fieldset>
    </div>
-  </div><script language="JavaScript" src="/js/search.js" type="text/javascript">
+  </div><script language="JavaScript" src="js/search.js" type="text/javascript">
 </script>
  </body>
 </html>
