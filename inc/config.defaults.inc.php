@@ -16,10 +16,10 @@ if (!defined('BX_PROJECT_DIR')) {
     define('BX_PROJECT_DIR', dirname(dirname(__FILE__)));
 }
 if (!defined('BX_POPOON_DIR')) {
-    define('BX_POPOON_DIR', BX_PROJECT_DIR . '/libs/popoon/');
+    define('BX_POPOON_DIR', BX_PROJECT_DIR . '/vendor/popoon/');
 }
 if (!defined('BX_INCLUDE_DIR')) {
-    define('BX_INCLUDE_DIR', BX_PROJECT_DIR. '/libs/');
+    define('BX_INCLUDE_DIR', BX_PROJECT_DIR. '/vendor/');
 }
 if (!defined('BX_TEMP_DIR')) {
     define('BX_TEMP_DIR', BX_PROJECT_DIR. '/tmp/');
