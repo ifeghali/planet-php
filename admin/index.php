@@ -19,7 +19,7 @@ $BX_config['popoon']['cacheDir'] = BX_PROJECT_DIR.'tmp/';
 /*$BX_config['popoon']['cacheParams'] = array('cache_dir' => BX_PROJECT_DIR.'/tmp/cache','encoding_mode'=>'slash');
 $BX_config['popoon']['cacheContainer'] = 'file';*/
 
-include_once(BX_POPOON_DIR."/popoon/popoon.php");
+include_once(BX_POPOON_DIR."/popoon.php");
 if (isset($_GET['path'])) {
     $path =    $_GET['path'];
 } else {
