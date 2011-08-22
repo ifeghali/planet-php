@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-include_once dirname(__FILE__) . '/../../inc/config.inc.php';
+include_once dirname(__FILE__) . '/../inc/config.inc.php';
 include_once 'aggregator.php';
 
 $blogId = null;
