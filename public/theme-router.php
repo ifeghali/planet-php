@@ -10,7 +10,7 @@ if (empty($query)) {
 }
 
 header('location: '.sprintf(
-    '%s/%s/%s/%s',
+    '%s%s/%s/%s',
     dirname($_SERVER['SCRIPT_NAME']),
     'themes',
     $BX_config['theme'],
