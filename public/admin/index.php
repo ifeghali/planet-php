@@ -29,5 +29,3 @@ $sitemap = new popoon (BX_PROJECT_DIR."/admin/sitemap/sitemap.xml",$path,
 $BX_config['popoon']
 );
 
-?>
- 
