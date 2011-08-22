@@ -62,7 +62,13 @@ if (!file_exists($cacheFile)) {
             $viewData['nav'] = array('prev' => null, 'next' => null);
         }
 
-        $planet->render('planet.tpl', $viewData);
+        $planet->render(
+            sprintf(
+                '%s/index.tpl',
+                $BX_config['theme']
+            ),
+            $viewData
+        );
 
     } catch (Exception $e) {
         die("Just come back later.");
