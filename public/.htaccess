@@ -16,7 +16,7 @@ DirectoryIndex router.php
 RewriteEngine On 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule !\.(js|ico|gif|jpg|png|css)$ /router.php
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ router.php
 RewriteRule ^theme/(.*)$ theme-router.php?r=$1 [L]
 RewriteRule ^favicon\.ico$ theme-router.php?r=favicon.ico [L]
 
