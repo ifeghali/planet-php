@@ -5,8 +5,6 @@ php_flag display_errors off
 AddDefaultCharset utf-8
 php_value default_charset utf-8
 
-#RewriteEngine On
-
 DirectoryIndex router.php
 
 # 195.226.16.50
@@ -22,8 +20,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule !\.(js|ico|gif|jpg|png|css)$ router.php
 
 # planet-pear.org specific
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L] 
-
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L] 
+#RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L] 
