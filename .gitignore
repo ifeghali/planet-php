@@ -4,5 +4,6 @@ s9y
 s9y.
 inc/config.inc.php
 inc/config-admin.php
+inc/admin-passwd
 public/info.php
 .swp

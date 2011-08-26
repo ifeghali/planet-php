@@ -1,27 +1,23 @@
 php_value error_reporting 2039
+php_flag display_errors on
 php_value magic_quotes_gpc off
+
+DirectoryIndex index.php
 
 RewriteEngine On
 RewriteRule ^webdav$  %{REQUEST_URI}/ [L,R]
-
-
 
 RewriteCond     %{REQUEST_URI}  !^.*index.php
 RewriteCond     %{REQUEST_URI}  !^.*deletecache.php
 RewriteCond     %{REQUEST_URI}  !^.*epoz/
 RewriteCond     %{REQUEST_URI}  !^.*_vti_.*
-
 RewriteRule ^(.+)$ ./index.php?path=$1 [QSA]
 
- deny from all
-#       Allow From 212.71.98.109
-#       Allow From 212.71.97.156
-       Allow From 127.0.0.1
-#Allow From 212.55.202.249
-Allow From 194.50.176.165 
+#deny from all
+#allow from 127.0.0.1
+
 AuthType Basic
-AuthName EBP-Preview
-AuthUserFile /home/bitflux/.htpasswd
+AuthName Planet-Admin
+AuthUserFile ../../inc/admin-passwd
 Satisfy any
 require valid-user
-
