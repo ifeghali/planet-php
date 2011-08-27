@@ -1,6 +1,6 @@
   function niceURL () {
             var value=document.getElementById("searchtext").value;
-            window.location.href = "/search/" + value;
+            window.location.href = "search/" + value;
             return false;
           }
 
