@@ -10,80 +10,80 @@ require_once 'MDB2.php';
 
 class Planet
 {
-	protected $_db;
-	
-	public function __construct($db = null) 
-	{
-		$this->_db = $db;
-	}
+    protected $_db;
 
-	protected function _validateRss($url) 
-	{
-		$xml = new DomDocument();
-		if(!@$xml->load($url)) 
-			return false;
-		return true;
-	}
+    public function __construct($db = null) 
+    {
+        $this->_db = $db;
+    }
 
-	public function addFeedForm($url) 
-	{
-		if (empty($url)) {
-			throw new Exception('Empty URL');
-		}
+    protected function _validateRss($url) 
+    {
+        $xml = new DomDocument();
+        if(!@$xml->load($url)) 
+            return false;
+        return true;
+    }
 
-		$options = array(
-			'allowed_schemes' => array('http', 'https'),
-			'strict' => ''
-		);
-		if (!Validate::uri($url, $options)) {
-			throw new Exception('Invalid URL');
-		}
-				
-		if (!($fp = fopen($url, "r"))) {
-			throw new Exception('URL not found');
-		}
-		fclose($fp);
+    public function addFeedForm($url) 
+    {
+        if (empty($url)) {
+            throw new Exception('Empty URL');
+        }
 
-		if (!$this->_validateRss($url)) {
-			throw new Exception('Invalid RSS');
-		}
-		
-		$stmt = $this->_db->prepare('INSERT INTO feeds SET link = ?', array('text'));
-		return $stmt->execute($url);
-	}
+        $options = array(
+            'allowed_schemes' => array('http', 'https'),
+            'strict' => ''
+        );
+        if (!Validate::uri($url, $options)) {
+            throw new Exception('Invalid URL');
+        }
 
-	public function getFeeds() 
-	{
-		$results = array();
-		$stmt    = $this->_db->query("SELECT id, link FROM feeds ORDER BY ID");
+        if (!($fp = fopen($url, "r"))) {
+            throw new Exception('URL not found');
+        }
+        fclose($fp);
 
-		while ($row = $stmt->fetchRow(MDB2_FETCHMODE_ASSOC))
-		{
-			$results[] = $row;
-		}
+        if (!$this->_validateRss($url)) {
+            throw new Exception('Invalid RSS');
+        }
 
-		return $results;
-	}
+        $stmt = $this->_db->prepare('INSERT INTO feeds SET link = ?', array('text'));
+        return $stmt->execute($url);
+    }
 
-	public function deleteFeed($id)
-	{
-		if (empty($id)) {
-			throw new Exception('Cannot delete an empty id');
-		}
-		
-		$stmt = $this->_db->prepare('DELETE FROM feeds WHERE ID = ?', array('integer'));
-		return $stmt->execute($id);
-	}
+    public function getFeeds() 
+    {
+        $results = array();
+        $stmt    = $this->_db->query("SELECT id, link FROM feeds ORDER BY ID");
+
+        while ($row = $stmt->fetchRow(MDB2_FETCHMODE_ASSOC))
+        {
+            $results[] = $row;
+        }
+
+        return $results;
+    }
+
+    public function deleteFeed($id)
+    {
+        if (empty($id)) {
+            throw new Exception('Cannot delete an empty id');
+        }
+
+        $stmt = $this->_db->prepare('DELETE FROM feeds WHERE ID = ?', array('integer'));
+        return $stmt->execute($id);
+    }
 }
 
 function listFeeds(Planet $p, HTML_Template_IT $it)
 {
-	$it->setCurrentBlock('list.entry');
-	foreach ($p->getFeeds() as $feed) {
-		$it->setVariable('id', $feed['id']);
-		$it->setVariable('link', $feed['link']);
-		$it->parseCurrentBlock();
-	}
+    $it->setCurrentBlock('list.entry');
+    foreach ($p->getFeeds() as $feed) {
+        $it->setVariable('id', $feed['id']);
+        $it->setVariable('link', $feed['link']);
+        $it->parseCurrentBlock();
+    }
 }
 
 function loginFunction($username = null, $status = null, &$auth = null)
@@ -117,28 +117,28 @@ if (isset($_GET['logout']) && $auth->checkAuth()) {
 }
 
 if ($auth->checkAuth()) {
-	try {
-		if (!empty($_POST['feedurl'])) {
-			$planet->addFeedForm($_POST['feedurl']);
-		}
+    try {
+        if (!empty($_POST['feedurl'])) {
+            $planet->addFeedForm($_POST['feedurl']);
+        }
 
-		if (!empty($_GET['delete']) && empty($_GET['deleteReally'])) {
-			$it->setVariable('id', (int) $_GET['delete']);
-			$it->parse('feed.delete');
-			$it->show();
-			exit;
-		}
-		
-		if (!empty($_GET['delete']) && !empty($_GET['deleteReally'])) {
-			$planet->deleteFeed((int) $_GET['delete']);
-		}
-		
-		$it->setVariable('error', '');
-	} catch (Exception $e) {
-		$it->setVariable('error', $e->getMessage());
-	}
+        if (!empty($_GET['delete']) && empty($_GET['deleteReally'])) {
+            $it->setVariable('id', (int) $_GET['delete']);
+            $it->parse('feed.delete');
+            $it->show();
+            exit;
+        }
 
-	listFeeds($planet, $it);
-	$it->touchBlock('feed.add');
-	$it->show();
+        if (!empty($_GET['delete']) && !empty($_GET['deleteReally'])) {
+            $planet->deleteFeed((int) $_GET['delete']);
+        }
+
+        $it->setVariable('error', '');
+    } catch (Exception $e) {
+        $it->setVariable('error', $e->getMessage());
+    }
+
+    listFeeds($planet, $it);
+    $it->touchBlock('feed.add');
+    $it->show();
 }
