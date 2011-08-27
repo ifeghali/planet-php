@@ -1,5 +1,5 @@
 <?php
-require_once '../../inc/config-admin.php';
+require_once '../../inc/config-admin.inc.php';
 require_once '../../inc/config.inc.php';
 require_once 'Auth.php';
 require_once 'Log.php';
