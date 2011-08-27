@@ -10,7 +10,7 @@ define('SECRET_FEED_HASH', ''); // if set, this hides your feeds
 // OVERRIDE CONSTANTS BEFORE DEFAULTS
 
 // load default constants
-include dirname(__FILE__) . '/config.defaults.inc.php';
+include dirname(__FILE__) . '/config-defaults.inc.php';
 
 // database config
 $BX_config['dsn'] = 'mysql://root:@localhost/planet-php';
