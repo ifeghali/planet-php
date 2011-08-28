@@ -1,16 +1,8 @@
 <?php
-while (getLoad() > 7) {
-    print "load > 7. wait 20 sec. \n";
-    sleep(20);
-}
+require_once 'utf2entities.php';
+require_once 'magpierss/rss_fetch.inc';
 
-include_once 'MDB2.php';
-include_once 'utf2entities.php';
-//include_once('HTTP/Request.php');
-
-include_once 'magpierss/rss_fetch.inc';
-
-class aggregator
+class Aggregator
 {
     protected $mdb = null;
     protected $hasUpdates = false;
@@ -390,16 +382,4 @@ class aggregator
             return false;
         }
     }
-}
-
-/**
- * This doesn't work if your system doesn't have /proc.
- *
- * Disabled for the time being.
- *
- * @return int
- */
-function getLoad() {
-    return 0;
-    return substr(file_get_contents("/proc/loadavg"),0,4);
 }
