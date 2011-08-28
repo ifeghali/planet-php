@@ -15,6 +15,7 @@ RewriteEngine On
 RewriteRule ^theme/(.*)$ theme-router.php?r=$1 [L]
 RewriteRule ^favicon\.ico$ theme-router.php?r=favicon.ico [L]
 RewriteRule ^opensearch\.xml$ theme-router.php?r=opensearch.xml [L]
+RewriteRule ^index/(.*)$ $1 [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule !\.(js|ico|gif|jpg|png|css)$ router.php
