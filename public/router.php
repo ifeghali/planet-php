@@ -1,8 +1,16 @@
 <?php
+
 // Get configuration
 if (!include dirname(__FILE__) . '/../inc/config.inc.php') {
     die("No conf.");
 }
+
+/* INCLUDES ***************************************************************** */
+require_once 'Net/Url/Mapper.php';
+require_once 'PlanetPEAR.php';
+require_once 'PlanetPEAR/Controller/Base.php';
+require_once 'PlanetPEAR/Controller/Index.php';
+require_once 'MDB2.php';
 
 // Init Router
 try {
