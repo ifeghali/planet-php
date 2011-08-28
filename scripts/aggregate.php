@@ -13,6 +13,9 @@ while (getLoad() > 7) {
     sleep(20);
 }
 
+/**
+ * Check if we are going to update one blog or all of them
+ */
 $blogId = null;
 if (isset($argv[1]) || !empty($argv[1])) {
     $blogId = (int) $argv[1];
@@ -23,10 +26,13 @@ if (isset($argv[1]) || !empty($argv[1])) {
 }
 
 $agg = new Aggregator();
-$agg->aggregateAllBlogs($argv[1]);
+
+/**
+ * do the magic
+ */
+$agg->aggregateAllBlogs($blogId);
 if ($agg->isNew() === true) {
-    $tmp = dirname(__FILE__) . '/../../tmp';
-    foreach (glob($tmp . '/Index-*') as $file) {
+    foreach (glob(BX_TEMP_DIR . 'Index-*') as $file) {
         unlink($file);
     }
 }
