@@ -7,6 +7,11 @@ define('PROJECT_ADMIN_EMAIL', 'we@planet-php.org');
 
 define('SECRET_FEED_HASH', ''); // if set, this hides your feeds
 
+/**
+ * Set this to disable caching
+ */
+define('PLANET_DEBUG', 0);
+
 // OVERRIDE CONSTANTS BEFORE DEFAULTS
 
 // load default constants

@@ -26,6 +26,9 @@ if (!defined('BX_TEMP_DIR')) {
 if (!defined('TEMPLATE_DIR')) {
     define('TEMPLATE_DIR', BX_PROJECT_DIR . '/templates/');
 }
+if (!defined('PLANET_DEBUG')) {
+    define('PLANET_DEBUG', 0);
+}
 
 // consider commenting this out and move this to php.ini or similar
 ini_set('include_path',

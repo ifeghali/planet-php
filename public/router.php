@@ -43,7 +43,7 @@ $planet->setQuery($query);
 $cacheName = $planet->getCacheName();
 $cacheFile = BX_TEMP_DIR . '/' . $cacheName;
 
-if (!file_exists($cacheFile)) {
+if (!file_exists($cacheFile) || PLANET_DEBUG) {
 
     ob_start();
 
