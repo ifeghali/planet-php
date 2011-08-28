@@ -25,7 +25,7 @@ Others:
 INSTALLATION
 ************
 
-git checkout git://github.com/ifeghali/planet-php.git
+git clone git://github.com/ifeghali/planet-php.git
 cp config/config.inc.php-dist config/config.inc.php
 
 - adjust the dsn parameter (and other config options if you want)
