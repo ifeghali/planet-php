@@ -4,7 +4,9 @@
  */
 require_once dirname(dirname(__FILE__)).'/config/config.inc.php';
 
-// BLOCK ACCESS TO FEED
+/**
+ * If secred hash is set, password protect feed
+ */
 if (defined('SECRET_FEED_HASH')) {
     if (SECRET_FEED_HASH != '') {
         if ($_GET['hash'] != SECRET_FEED_HASH) {
@@ -19,7 +21,9 @@ try {
 
     $planetFeed = new PlanetPEAR_Feed($_GET['type']);
 
-    // retrieve entries
+    /**
+     * Retrieve entries
+     */
     foreach ($results as $result) {
 
         $entry = $planetFeed->createEntry();
@@ -35,8 +39,6 @@ try {
 
         $planetFeed->addEntry($entry);
     }
-
-    //var_dump($planetFeed); exit;
 
     echo $planetFeed;
 
