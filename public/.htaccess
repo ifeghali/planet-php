@@ -17,6 +17,7 @@ RewriteRule ^favicon\.ico$ theme-router.php?r=favicon.ico [L]
 RewriteRule ^opensearch\.xml$ theme-router.php?r=opensearch.xml [L]
 RewriteRule ^atom$ feed.php?type=atom [QSA,L]
 RewriteRule ^rss$ feed.php?type=rss [QSA,L]
+RewriteRule ^search/(.*)$ router.php?search=$1 [L]
 RewriteRule ^index/(.*)$ $1 [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
