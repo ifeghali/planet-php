@@ -4,13 +4,6 @@
  */
 require_once dirname(dirname(dirname(__FILE__))).'/config/config.inc.php';
 require_once dirname(dirname(dirname(__FILE__))).'/config/config-admin.inc.php';
-require_once 'Auth.php';
-require_once 'Log.php';
-require_once 'Log/observer.php';
-require_once 'Validate.php';
-require_once 'HTML/Template/IT.php';
-require_once 'MDB2.php';
-require_once '../../library/PlanetAdmin.php';
 
 function listFeeds(PlanetAdmin $p, HTML_Template_IT $it)
 {
