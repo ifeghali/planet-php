@@ -11,6 +11,7 @@ function listFeeds(PlanetAdmin $p, HTML_Template_IT $it)
     foreach ($p->getFeeds() as $feed) {
         $it->setVariable('id', $feed['id']);
         $it->setVariable('link', $feed['link']);
+        $it->setVariable('author', $feed['author']);
         $it->parseCurrentBlock();
     }
 }
@@ -47,8 +48,8 @@ if (isset($_GET['logout']) && $auth->checkAuth()) {
 
 if ($auth->checkAuth()) {
     try {
-        if (!empty($_POST['feedurl'])) {
-            $planet->addFeedForm($_POST['feedurl']);
+        if (!empty($_POST)) {
+            $planet->addFeedForm($_POST);
         }
 
         if (!empty($_GET['delete']) && empty($_GET['deleteReally'])) {

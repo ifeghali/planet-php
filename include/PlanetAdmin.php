@@ -17,10 +17,19 @@ class PlanetAdmin
         return true;
     }
 
-    public function addFeedForm($url) 
+    public function addFeedForm($post) 
     {
+        /**
+         * FIXME: this is probably not safe
+         */
+        extract($post);
+
         if (empty($url)) {
             throw new Exception('Empty URL');
+        }
+
+        if (empty($author)) {
+            throw new Exception('Empty author');
         }
 
         $options = array(
@@ -40,14 +49,17 @@ class PlanetAdmin
             throw new Exception('Invalid RSS');
         }
 
-        $stmt = $this->_db->prepare('INSERT INTO feeds SET link = ?', array('text'));
-        return $stmt->execute($url);
+        $stmt = $this->_db->prepare(
+            'INSERT INTO feeds SET link = ?, author = ?',
+            array('text', 'text')
+        );
+        return $stmt->execute(array($url, $author));
     }
 
     public function getFeeds() 
     {
         $results = array();
-        $stmt    = $this->_db->query("SELECT id, link FROM feeds ORDER BY ID");
+        $stmt    = $this->_db->query("SELECT id, link, author FROM feeds ORDER BY ID");
 
         while ($row = $stmt->fetchRow(MDB2_FETCHMODE_ASSOC))
         {
