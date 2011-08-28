@@ -1,27 +1,38 @@
+ABOUT
+*****
+
+This is planet-php, a web interface with feed aggregation functionalities.
+
 PREQUISITES
 ***********
 
-- PHP 5 (with enabled xslt support -> --with-xsl)
+PHP Dependencies:
+- PHP 5
 - The tidy extension (optional, if you don't want to tidy it, just comment it out in the sitemap)
 - A database (only tested with mysql, but should work with others, too)
-- MDB2 ( pear install MDB2)
-- Cache (pear install Cache), if you want caching
-- Net_URL_Mapper (pear install Net_URL_Mapper from pear beta channel)
+
+PEAR Packages:
+- Auth
+- HTML_Template_IT
+- MDB2
+- Cache
+- Net_URL_Mapper
+
+Others:
+- Zend Framework (Zend/Filter/StripTags.php)
 
 
 INSTALLATION
 ************
 
-
-- get it from http://github.com/chregu/planet-php/
-
-- cp inc/config.inc.php-dist to inc/config.inc.php
+git checkout git://github.com/ifeghali/planet-php.git
+cp config/config.inc.php-dist config/config.inc.php
 
 - adjust the dsn parameter (and other config options if you want)
 
 - make tmp directory writeable for the webserver
 
-- import the db from div/db/mysql.sql
+- import the db from config/database.sql (this is a dump from mysql)
 
 - add feeds to feeds table
 
@@ -29,9 +40,16 @@ INSTALLATION
 
 - open the page ;)
 
-- Administration has to be done via phpMyAdmin (or similar), just add your 
-   RSS feeds to the feeds table. The rest should be done automatically.
-
 - Add a crontab:
    */5 * * * * /path/to/php-cli /path/to/planet-code/scripts/aggregate.php
-.
+
+
+ADMINISTRATION
+**************
+
+cp config/config-admin.inc.php-dist config/config-admin.inc.php
+
+- if you want to authenticate via database, adjust the dsn
+
+- if you want to authenticate via PEAR, comment out the second block
+    of code. uncomment the first block of code.
