@@ -67,20 +67,6 @@ class PlanetPEAR_Feed
     }
 
     /**
-     * Autoloader for Zend Framework
-     *
-     * @return boolean
-     */
-    public static function autoload($className)
-    {
-        $file  = dirname(__FILE__);
-        $file .= str_replace('_', '/', $className);
-        $file .= '.php';
-
-        return require $file;
-    }
-
-    /**
      * Returns an array for Zend_Feed_Builder
      *
      * @return array
@@ -178,5 +164,3 @@ class PlanetPEAR_Feed
         return $this;
     }
 }
-
-spl_autoload_register(array('PlanetPEAR_Feed', 'autoload'));

@@ -47,3 +47,18 @@ if (!defined('MAGPIE_CACHE_AGE')) {
 if (!defined('MAGPIE_USER_AGENT')) {
     define('MAGPIE_USER_AGENT', PROJECT_NAME . ' Aggregator/0.2 (PHP5) (' . PROJECT_URL . ')');
 }
+
+/**
+ * Autoloader
+ *
+ * @return boolean
+ */
+function autoload($className)
+{
+    $file = str_replace('_', '/', $className);
+    $file .= '.php';
+
+    return require_once $file;
+}
+
+spl_autoload_register('autoload');

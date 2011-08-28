@@ -6,10 +6,6 @@ if (!include dirname(__FILE__) . '/../inc/config.inc.php') {
     die("No conf.");
 }
 
-/* INCLUDES ***************************************************************** */
-require_once 'PlanetPEAR.php';
-require_once 'PlanetPEAR/Feed.php';
-
 // BLOCK ACCESS TO FEED
 if (defined('SECRET_FEED_HASH')) {
     if (SECRET_FEED_HASH != '') {
