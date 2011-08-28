@@ -4,7 +4,14 @@
  * Configuration file.
  */
 require_once dirname(dirname(__FILE__)).'/config/config.inc.php';
-require_once 'aggregator.php';
+
+/**
+ * Sleep if machine load is too high
+ */
+while (getLoad() > 7) {
+    print "load > 7. wait 20 sec. \n";
+    sleep(20);
+}
 
 $blogId = null;
 if (isset($argv[1]) || !empty($argv[1])) {
@@ -15,7 +22,7 @@ if (isset($argv[1]) || !empty($argv[1])) {
     }
 }
 
-$agg = new aggregator();
+$agg = new Aggregator();
 $agg->aggregateAllBlogs($argv[1]);
 if ($agg->isNew() === true) {
     $tmp = dirname(__FILE__) . '/../../tmp';
@@ -35,4 +42,14 @@ $hubs = array("http://pubsubhubbub.appspot.com");
 $noti->addPubSubHubs($topicurls, $hubs);
     $noti->notifyAll();
 
-
+/**
+ * This doesn't work if your system doesn't have /proc.
+ *
+ * Disabled for the time being.
+ *
+ * @return int
+ */
+function getLoad() {
+    return 0;
+    return substr(file_get_contents("/proc/loadavg"),0,4);
+}
