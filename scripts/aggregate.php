@@ -31,6 +31,7 @@ if ($agg->isNew() === true) {
     }
 }
 
+/* disable hub notify **********************************************************
 $noti = new lx_notifier();
 
 $url = "http://www.planet-php.net/";
@@ -40,12 +41,11 @@ $topicurls = array(
 
 $hubs = array("http://pubsubhubbub.appspot.com");
 $noti->addPubSubHubs($topicurls, $hubs);
-    $noti->notifyAll();
+$noti->notifyAll();
+*******************************************************************************/
 
 /**
  * This doesn't work if your system doesn't have /proc.
- *
- * Disabled for the time being.
  *
  * @return int
  */
