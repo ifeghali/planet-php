@@ -1,6 +1,9 @@
 <?php
-require_once '../../inc/config-admin.inc.php';
-require_once '../../inc/config.inc.php';
+/**
+ * Configuration file.
+ */
+require_once dirname(dirname(dirname(__FILE__))).'/config/config.inc.php';
+require_once dirname(dirname(dirname(__FILE__))).'/config/config-admin.inc.php';
 require_once 'Auth.php';
 require_once 'Log.php';
 require_once 'Log/observer.php';

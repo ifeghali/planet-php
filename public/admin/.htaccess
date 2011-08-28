@@ -18,6 +18,6 @@ RewriteRule ^(.+)$ ./index.php?path=$1 [QSA]
 
 AuthType Basic
 AuthName Planet-Admin
-AuthUserFile ../../inc/admin-passwd
+AuthUserFile ../../config/admin-passwd
 Satisfy any
 require valid-user

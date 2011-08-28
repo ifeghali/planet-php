@@ -1,7 +1,10 @@
 #!/usr/bin/env php
 <?php
-include_once dirname(__FILE__) . '/../inc/config.inc.php';
-include_once 'aggregator.php';
+/**
+ * Configuration file.
+ */
+require_once dirname(dirname(__FILE__)).'/config/config.inc.php';
+require_once 'aggregator.php';
 
 $blogId = null;
 if (isset($argv[1]) || !empty($argv[1])) {

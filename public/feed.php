@@ -2,9 +2,7 @@
 /**
  * Configuration file.
  */
-if (!include dirname(__FILE__) . '/../inc/config.inc.php') {
-    die("No conf.");
-}
+require_once dirname(dirname(__FILE__)).'/config/config.inc.php';
 
 // BLOCK ACCESS TO FEED
 if (defined('SECRET_FEED_HASH')) {

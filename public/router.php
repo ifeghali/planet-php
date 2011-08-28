@@ -1,9 +1,8 @@
 <?php
-
-// Get configuration
-if (!include dirname(__FILE__) . '/../inc/config.inc.php') {
-    die("No conf.");
-}
+/**
+ * Configuration file.
+ */
+require_once dirname(dirname(__FILE__)).'/config/config.inc.php';
 
 // Init Router
 try {

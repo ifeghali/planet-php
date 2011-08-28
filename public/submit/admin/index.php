@@ -1,4 +1,8 @@
 <?php
+/**
+ * Configuration file.
+ */
+require_once dirname(dirname(dirname(dirname(__FILE__)))).'/config/config.inc.php';
 
 $dom = new domdocument();
 $xsl = new domdocument();
@@ -7,14 +11,6 @@ $xsl->load("../../themes/planet-php/submit-admin.xsl");
 
 $xslt = new xsltprocessor();
 $xslt->registerPHPFunctions();
-
-
-
-
-
-include("../../inc/config.inc.php");
-
-include("MDB2.php");
 
 $db = MDB2::connect($BX_config['dsn']);
 

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Configuration file.
+ */
+require_once dirname(dirname(dirname(__FILE__))).'/config/config.inc.php';
 
 $dom = new domdocument();
 $xsl = new domdocument();
@@ -40,9 +44,6 @@ if ( !empty($_POST['name']) &&  !empty($_POST['firstname']) && !empty($_POST['ur
     if (strpos($header, "\n") !== FALSE or strpos($header, "\r") !== FALSE) {
        die("From is invalid.");
     }
-
-    include "../inc/config.inc.php";
-    include "MDB2.php";
 
     if (!$spam) {
         $db = MDB2::connect($BX_config['dsn']);
