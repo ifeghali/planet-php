@@ -84,7 +84,7 @@ class PlanetPEAR
     public function getCacheName()
     {
         if ($this->isQuery()) {
-            return 'search' . $query;
+            return 'search-' . md5($this->query);
         }
         return sprintf(
             '%s-%s-%s',
