@@ -22,6 +22,13 @@ class PlanetPEAR
         } else {
             $this->db = MDB2::connect($GLOBALS['BX_config']['dsn']);
         }
+
+        if (MDB2::isError($this->db)) {
+            throw new RuntimeException(
+                $this->db->getUserInfo(),
+                $this->db->getCode()
+            );
+        }
     }
 
     /**
