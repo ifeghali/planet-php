@@ -1,10 +1,91 @@
 <?php
-abstract class PlanetPEAR_Controller_Base
+abstract class Controller
 {
-    protected $planet;
+    /**
+     * Controller name
+     */
+    protected $name;
 
-    public function __construct(PlanetPEAR $planet)
+    /**
+     * Action to render
+     */
+    protected $action;
+
+    /**
+     * User input data
+     */
+    protected $data;
+
+    public function __construct()
     {
-        $this->planet = $planet;
+        $this->loadModel($this->name);
+    }
+
+    protected function loadModel($model = null)
+    {
+        $model_class = "Model_${model}";
+
+        try {
+            $obj = new $model_class();
+        } catch (RuntimeException $e) {
+            die("Database error.");
+        }
+
+        $this->$model = $obj;
+    }
+
+    public function getCacheName($data = null)
+    {
+        if (empty($data)) {
+            return sprintf(
+                '%s-%s',
+                $this->name,
+                $this->action
+            );
+        }
+
+        ksort($data);
+        $data = implode('-', $data);
+
+        return sprintf(
+            '%s-%s-%s',
+            $this->name,
+            $this->action,
+            $data
+        );
+    }
+
+    public function setAction($action = null)
+    {
+        $this->action = $action;
+    }
+    
+    public function setData($data = array())
+    {
+        $this->data = $data;
+    }
+
+    public function render()
+    {
+        ob_start();
+
+        try {
+            $viewData = call_user_func(array($this, $this->action));
+            extract($viewData);
+
+            $template = sprintf(
+                '%s/index.tpl',
+                $GLOBALS['BX_config']['theme']
+            );
+            include TEMPLATE_DIR . $template;
+
+        } catch (Exception $e) {
+            die("Just come back later.");
+        }
+
+        $page = ob_get_contents();
+        ob_end_clean();
+
+        return $page;
     }
 }

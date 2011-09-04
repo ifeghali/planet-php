@@ -2,14 +2,17 @@
 /**
  * @author Till Klampaeckel <till@php.net>
  */
-class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
+class Controller_Planet extends Controller
 {
-    protected $data;
-    protected $planet;
+    protected $name = 'Planet';
 
     public function index()
     {
-        return $this->page(0, null);
+        $this->setData(array(
+            'page'  => 0,
+            'query' => null
+        ));
+        return $this->page();
     }
 
     /**
@@ -20,14 +23,38 @@ class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
      *
      * @return array
      */
-    public function page($from, $query)
+    public function page()
     {
+        $data = array_merge(
+            array(
+                'page'  => 0,
+                'query' => null
+            ),
+            $this->data
+        );
+        extract($data);
+
+        $return = array();
+        $return['blogs']     = $this->Planet->getBlogs();
+        $return['BX_config'] = $GLOBALS['BX_config'];
+
         if (empty($query)) {
             $query = null;
+            $return['nav'] = $this->Planet->getNavigation($page);
+        } else {
+            $return['nav'] = array('prev' => null, 'next' => null);
         }
-        $this->data['entries'] = $this->planet->getEntries('default', $from, $query);
 
-        return $this->data;
+        $return['entries'] = $this->Planet->getEntries(
+            'default', $page, $query
+        );
+
+        return $return;
+    }
+
+    public function search()
+    {
+        return $this->page();
     }
 
     /**
@@ -51,7 +78,7 @@ class PlanetPEAR_Controller_Index extends PlanetPEAR_Controller_Base
  </head>
  <body>
 XML;
-        foreach ($this->planet->getFeeds('default') as $data) {
+        foreach ($this->Planet->getFeeds('default') as $data) {
             echo '<outline type="rss" text="'
                 . htmlspecialchars($data['title'])
                 . '" htmlUrl="'
@@ -65,5 +92,28 @@ XML;
 </opml>
 XML;
         exit(0);
+    }
+
+    public function setData($data = array())
+    {
+        if (array_key_exists('query', $data)) {
+            $data['query'] = trim($data['query']);
+        }
+        if (array_key_exists('page', $data)) {
+            $data['page'] = (int)($data['page']);
+        }
+        
+        $this->data = $data;
+    }
+
+    public function getCacheName()
+    {
+        $data = $this->data;
+
+        if (array_key_exists('query', $data)) {
+            $data['query'] = md5($data['query']);
+        }
+
+        return parent::getCacheName($data);
     }
 }
