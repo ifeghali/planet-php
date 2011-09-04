@@ -1,5 +1,5 @@
 <?php
-class PlanetPEAR_Feed_Entry
+class Model_Feed_Entry extends Model 
 {
     protected $data = array(
 

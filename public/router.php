@@ -14,6 +14,10 @@ try {
     $m->connect('search/:query', array('controller' => 'planet', 'action' => 'page'));
     $m->connect('submit', array('controller' => 'submit', 'action' => 'index'));
     $m->connect('admin', array('controller' => 'admin', 'action' => 'index'));
+    $m->connect('atom', array('controller' => 'feed', 'action' => 'atom'));
+    $m->connect('atom/:hash', array('controller' => 'feed', 'action' => 'atom'));
+    $m->connect('rss', array('controller' => 'feed', 'action' => 'rss'));
+    $m->connect('rss/:hash', array('controller' => 'feed', 'action' => 'rss'));
 
     $route = $m->match($_SERVER['REQUEST_URI']);
 } catch (Net_URL_Mapper_Exception $e) {

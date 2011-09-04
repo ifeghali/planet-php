@@ -4,7 +4,7 @@
  * @package  Planet-PHP
  * @author   Till Klampaeckel <till@php.net>
  */
-class PlanetPEAR_Feed
+class Model_Feed extends Model 
 {
     /**
      * @var array $entries
@@ -24,7 +24,7 @@ class PlanetPEAR_Feed
     /**
      * @param string $type
      *
-     * @return PlanetPEAR_Feed
+     * @return Model_Feed
      *
      * @uses self::setType()
      * @uses self::reset()
@@ -113,11 +113,11 @@ class PlanetPEAR_Feed
     /**
      * Add another entry to this feed.
      *
-     * @param PlanetPEAR_Feed_Entry $entry
+     * @param Model_Feed_Entry $entry
      *
-     * return PlanetPEAR_Feed
+     * return Model_Feed
      */
-    public function addEntry(PlanetPEAR_Feed_Entry $entry)
+    public function addEntry(Model_Feed_Entry $entry)
     {
         $arrEntry        = $entry->toArray();
         $this->entries[] = $arrEntry;
@@ -126,11 +126,11 @@ class PlanetPEAR_Feed
     }
 
     /**
-     * @return PlanetPEAR_Feed_Entry
+     * @return Model_Feed_Entry
      */
     public function createEntry()
     {
-        $entry = new PlanetPEAR_Feed_Entry();
+        $entry = new Model_Feed_Entry();
         return $entry;
     }
 
