@@ -13,6 +13,7 @@ try {
     $m->connect('index/:page', array('controller' => 'planet', 'action' => 'page'));
     $m->connect('search/:query', array('controller' => 'planet', 'action' => 'page'));
     $m->connect('submit', array('controller' => 'submit', 'action' => 'index'));
+    $m->connect('submit/add', array('controller' => 'submit', 'action' => 'add'));
     $m->connect('admin', array('controller' => 'admin', 'action' => 'index'));
     $m->connect('atom', array('controller' => 'feed', 'action' => 'atom'));
     $m->connect('atom/:hash', array('controller' => 'feed', 'action' => 'atom'));
@@ -32,9 +33,12 @@ $c          = "Controller_".ucfirst(strtolower($route['controller']));
 $controller = new $c();
 
 $controller->setAction(strtolower($route['action']));
-$controller->setData(array_diff_key(
-    $route,
-    array('controller' => null, 'action' => null)
+$controller->setData(array_merge(
+    array_diff_key(
+        $route,
+        array('controller' => null, 'action' => null)
+    ),
+    $_POST
 ));
 
 $cacheFile = BX_TEMP_DIR . '/' . $controller->getCacheName();
