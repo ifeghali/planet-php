@@ -51,10 +51,21 @@ class Controller_Feed extends Controller
                 $this->Feed->addEntry($entry);
             }
 
-            echo $this->Feed;
+            return (string)$this->Feed;
 
         } catch (Exception $e) {
             die('Feed fail.');
         }
+    }
+
+    public function render()
+    {
+        try {
+            $viewData = call_user_func(array($this, $this->action));
+        } catch (Exception $e) {
+            die("Just come back later.");
+        }
+
+        return $viewData;
     }
 }
