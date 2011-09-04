@@ -16,6 +16,11 @@ abstract class Controller
      */
     protected $data;
 
+    /**
+     * View template
+     */
+    protected $template;
+
     public function __construct()
     {
         $this->loadModel($this->name);
@@ -74,8 +79,9 @@ abstract class Controller
             extract($viewData);
 
             $template = sprintf(
-                '%s/index.tpl',
-                $GLOBALS['BX_config']['theme']
+                '%s/%s.tpl',
+                $GLOBALS['BX_config']['theme'],
+                $this->template
             );
             include TEMPLATE_DIR . $template;
 

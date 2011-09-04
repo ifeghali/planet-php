@@ -4,7 +4,8 @@
  */
 class Controller_Planet extends Controller
 {
-    protected $name = 'Planet';
+    protected $name     = 'Planet';
+    protected $template = 'index';
 
     public function index()
     {
