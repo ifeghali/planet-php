@@ -32,7 +32,7 @@ $agg = new Aggregator();
  */
 $agg->aggregateAllBlogs($blogId);
 if ($agg->isNew() === true) {
-    foreach (glob(BX_TEMP_DIR . 'Index-*') as $file) {
+    foreach (glob(BX_TEMP_DIR . 'Planet-*') as $file) {
         unlink($file);
     }
 }
