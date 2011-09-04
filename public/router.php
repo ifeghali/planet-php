@@ -41,17 +41,21 @@ $controller->setData(array_merge(
     $_POST
 ));
 
-$cacheFile = BX_TEMP_DIR . '/' . $controller->getCacheName();
+$cacheName = $controller->getCacheName();
+$cacheFile = BX_TEMP_DIR . '/' . $cacheName;
 
-if (!file_exists($cacheFile) || PLANET_DEBUG) {
+if (empty($cacheName)
+    || !file_exists($cacheFile)
+    || PLANET_DEBUG
+) {
+
+    echo $page =$controller->render();
 
     $fp = fopen($cacheFile, 'w');
     if ($fp) {
         fwrite($fp, $page);
         fclose($fp);
     }
-
-    echo $controller->render();
 
 } else {
 
