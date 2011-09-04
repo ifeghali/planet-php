@@ -44,12 +44,15 @@ $controller->setData(array_merge(
 $cacheName = $controller->getCacheName();
 $cacheFile = BX_TEMP_DIR . '/' . $cacheName;
 
-if (empty($cacheName)
-    || !file_exists($cacheFile)
+if (empty($cacheName)) {
+
+    echo $page = $controller->render();
+
+} else if (!file_exists($cacheFile)
     || PLANET_DEBUG
 ) {
 
-    echo $page =$controller->render();
+    echo $page = $controller->render();
 
     $fp = fopen($cacheFile, 'w');
     if ($fp) {
