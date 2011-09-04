@@ -1,7 +1,0 @@
-php_value error_reporting 2039
-php_flag display_errors off
-
-AddDefaultCharset utf-8
-php_value default_charset utf-8
-
-DirectoryIndex index.php
