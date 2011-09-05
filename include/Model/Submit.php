@@ -30,18 +30,17 @@ class Model_Submit extends Model
             throw new Exception('Invalid data.');
         }
 
-        $this->db->query("set names 'utf8';");
         $query = $this->db->prepare(
             'INSERT INTO submissions (rss, name, url, email, description) VALUES (?, ?, ?, ?, ?)',
             array('text', 'text', 'text', 'text', 'text')
         );
         
         $res = $query->execute(array(
-            $this->db->quote($data['rss']),
-            $this->db->quote($data['name']),
-            $this->db->quote($data['url']),
-            $this->db->quote($data['email']),
-            $this->db->quote($data['description'])
+            $data['rss'],
+            $data['name'],
+            $data['url'],
+            $data['email'],
+            $data['description']
         ));
 
         if (MDB2::isError($res)) {
