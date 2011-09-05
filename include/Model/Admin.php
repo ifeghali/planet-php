@@ -1,12 +1,27 @@
 <?php
-
-class PlanetAdmin
+class Model_Admin extends Model
 {
-    protected $_db;
+    protected $db;
 
-    public function __construct($db = null) 
+    /**
+     * @param MDB2_Common $db Optional MDB2 object.
+     *
+     * @return $this
+     */
+    public function __construct(MDB2_Common $db = null)
     {
-        $this->_db = $db;
+        if ($db !== null) {
+            $this->db = $db;
+        } else {
+            $this->db = MDB2::connect($GLOBALS['BX_config']['dsn']);
+        }
+
+        if (MDB2::isError($this->db)) {
+            throw new RuntimeException(
+                $this->db->getUserInfo(),
+                $this->db->getCode()
+            );
+        }
     }
 
     protected function _validateRss($url) 
@@ -49,7 +64,7 @@ class PlanetAdmin
             throw new Exception('Invalid RSS');
         }
 
-        $stmt = $this->_db->prepare(
+        $stmt = $this->db->prepare(
             'INSERT INTO feeds SET link = ?, author = ?',
             array('text', 'text')
         );
@@ -59,7 +74,7 @@ class PlanetAdmin
     public function getFeeds() 
     {
         $results = array();
-        $stmt    = $this->_db->query("SELECT id, link, author FROM feeds ORDER BY ID");
+        $stmt    = $this->db->query("SELECT id, link, author FROM feeds ORDER BY ID");
 
         while ($row = $stmt->fetchRow(MDB2_FETCHMODE_ASSOC))
         {
@@ -75,7 +90,62 @@ class PlanetAdmin
             throw new Exception('Cannot delete an empty id');
         }
 
-        $stmt = $this->_db->prepare('DELETE FROM feeds WHERE ID = ?', array('integer'));
+        $stmt = $this->db->prepare('DELETE FROM feeds WHERE ID = ?', array('integer'));
         return $stmt->execute($id);
+    }
+
+    public function getSubmissions()
+    {
+        $results = array();
+        $stmt    = $this->db->query("SELECT * FROM submissions WHERE state = 0");
+
+        while ($row = $stmt->fetchRow(MDB2_FETCHMODE_ASSOC))
+        {
+            $results[] = $row;
+        }
+
+        return $results;
+    }
+
+    public function getSubmission($id = null)
+    {
+        $id   = $this->db->quote($id);
+        $stmt = $this->db->query("SELECT * FROM submissions WHERE id = $id");
+        $res  = $stmt->fetchRow(MDB2_FETCHMODE_ASSOC);
+
+        if ($this->db->isError($res)) {
+            die("a DB errror happened: " . $res->getUserInfo());
+        }
+
+        return $res;
+    }
+
+    public function flagSubmission($state) {
+        $stmt = $this->db->prepare(
+            'UPDATE submissions set STATE = ? WHERE id = ?',
+            array('integer', 'integer')
+        );
+
+        $res = $stmt->execute(array($state, $this->data['id']));
+        if ($this->db->isError($res)) {
+            die("a DB errror happened: " . $res->getUserInfo());
+        }
+    }
+
+    public function promoteSubmission($id) {
+
+        $entry = $this->getSubmission($id);
+
+        if ($entry['state'] != 0) {
+            die("There is no pending request #$id");
+        }
+
+        $data  = array(
+            'url'    => $entry['rss'],
+            'author' => $entry['name']
+        );
+
+        $this->addFeedForm($data);
+        $this->flagSubmission(1);
     }
 }

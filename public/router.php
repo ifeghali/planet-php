@@ -15,6 +15,9 @@ try {
     $m->connect('submit', array('controller' => 'submit', 'action' => 'index'));
     $m->connect('submit/add', array('controller' => 'submit', 'action' => 'add'));
     $m->connect('admin', array('controller' => 'admin', 'action' => 'index'));
+    $m->connect('admin/promote/:id', array('controller' => 'admin', 'action' => 'promote'));
+    $m->connect('admin/delete/:id', array('controller' => 'admin', 'action' => 'deleteFeed'));
+    $m->connect('admin/delete/:confirm/:id', array('controller' => 'admin', 'action' => 'deleteFeed'));
     $m->connect('atom', array('controller' => 'feed', 'action' => 'atom'));
     $m->connect('atom/:hash', array('controller' => 'feed', 'action' => 'atom'));
     $m->connect('rss', array('controller' => 'feed', 'action' => 'rss'));
