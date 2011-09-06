@@ -32,7 +32,7 @@ class Model_Admin extends Model
         return true;
     }
 
-    public function addFeedForm($post) 
+    public function addFeed($post) 
     {
         /**
          * FIXME: this is probably not safe
@@ -120,23 +120,25 @@ class Model_Admin extends Model
         return $res;
     }
 
-    public function flagSubmission($state) {
+    protected function flagSubmission($id, $state) {
+
         $stmt = $this->db->prepare(
             'UPDATE submissions set STATE = ? WHERE id = ?',
             array('integer', 'integer')
         );
 
-        $res = $stmt->execute(array($state, $this->data['id']));
+        $res = $stmt->execute(array($state, $id));
         if ($this->db->isError($res)) {
             die("a DB errror happened: " . $res->getUserInfo());
         }
+
     }
 
     public function promoteSubmission($id) {
 
         $entry = $this->getSubmission($id);
 
-        if ($entry['state'] != 0) {
+        if ($entry['state'] !== '0') {
             die("There is no pending request #$id");
         }
 
@@ -145,7 +147,18 @@ class Model_Admin extends Model
             'author' => $entry['name']
         );
 
-        $this->addFeedForm($data);
-        $this->flagSubmission(1);
+        $this->addFeed($data);
+        $this->flagSubmission($id, 1);
+    }
+
+    public function rejectSubmission($id) {
+
+        $entry = $this->getSubmission($id);
+
+        if ($entry['state'] !== '0') {
+            die("There is no pending request #$id");
+        }
+
+        $this->flagSubmission($id, -1);
     }
 }

@@ -94,4 +94,20 @@ abstract class Controller
 
         return $page;
     }
+
+    protected function redirect($url)
+    {
+        $url = PLANET_BASE_URL . $url;
+        header("location: $url");
+        exit;
+    }
+
+    protected function sendMail($to, $subject, $text)
+    {
+        $header = "From: " . PROJECT_ADMIN_EMAIL . "\r\n";
+
+        if (!mail($to, $subject, $text, $header)) {
+            throw new Exception('Could not send email.');
+        }
+    }
 }

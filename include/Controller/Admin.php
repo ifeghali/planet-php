@@ -39,7 +39,6 @@ class Controller_Admin extends Controller
 
     public function login()
     {
-        $this->tple->loadTemplatefile('admin-login.tpl', true, true);
         $this->tple->setVariable('base_url', PLANET_BASE_URL);
         $this->tple->setVariable('username', htmlspecialchars($this->data['username']));
 
@@ -48,9 +47,6 @@ class Controller_Admin extends Controller
 
     public function index()
     {
-        $this->tple->loadTemplatefile('admin.tpl', true, true);
-        $this->tple->setVariable('base_url', PLANET_BASE_URL);
-
         $this->listFeeds();
         $this->tple->touchBlock('feed.add');
 
@@ -64,24 +60,25 @@ class Controller_Admin extends Controller
         $this->auth->logout();
         $this->auth->start();
 
-        return $this->index();
+        $this->redirect();
     }
 
-    public function addFeed()
+    public function add()
     {
         try {
-            $this->Admin->addFeedForm($this->data);
+            $this->Admin->addFeed($this->data);
         } catch (Exception $e) {
             $this->tple->setVariable('error', $e->getMessage());
+            return $this->tple->get();
         }
 
-        return $this->tple->get();
+        $this->redirect();
     }
 
-    public function deleteFeed()
+    public function delete()
     {
         if (empty($this->data['id'])) {
-            return $this->index();
+            throw new Exception('Invalid id.');
         }
 
         if (!array_key_exists('confirm', $this->data)
@@ -96,9 +93,10 @@ class Controller_Admin extends Controller
             $this->Admin->deleteFeed((int)$this->data['id']);
         } catch (Exception $e) {
             $this->tple->setVariable('error', $e->getMessage());
+            return $this->tple->get();
         }
 
-        return $this->tple->get();
+        $this->redirect();
     }
 
     public function promote()
@@ -109,41 +107,59 @@ class Controller_Admin extends Controller
             throw new Exception('Invalid id.');
         }
 
-        $this->Admin->promoteSubmission($this->data['id']);
-        $data = $this->Admin->getSubmission($this->data['id']);
+        try {
+            $data     = $this->Admin->getSubmission($this->data['id']);
+            $mailtext = 'Hi
 
-        $mailtext = 'Hi
+                We\'d like to inform you, that your ' . PROJECT_NAME_HR .' submission for 
+                '. $data['url'].' was accepted and should show up in the next
+                (max. 30) minutes on ' . PROJECT_URL . '
 
-            We\'d like to inform you, that your ' . PROJECT_NAME_HR .' submission for 
-            '. $data['url'].' was accepted and should show up in the next
-            (max. 30) minutes on ' . PROJECT_URL . '
+                Thanks for your submission
 
-            Thanks for your submission
+                The ' . PROJECT_NAME_HR . ' team.';
 
-            The ' . PROJECT_NAME_HR . ' team.';
+            $this->Admin->promoteSubmission($this->data['id']);
+            $this->sendMail($data['email'], "Your " . PROJECT_NAME_HR . " submission was accepted", $mailtext);
+        } catch (Exception $e) {
+            $this->tple->setVariable('error', $e->getMessage());
+            return $this->tple->get();
+        }
 
-
-        $this->sendMail($data['email'], "Your " . PROJECT_NAME_HR . " submission was accepted", $mailtext);
-
-        return $this->tple->get();
+        $this->redirect();
     }
 
     public function reject()
     {
-        if (!empty($this->data['reallyreject']) 
-            && !empty($this->data['rejectreason'])
-        ) {
-            $this->Admin->refuseSubmission($this->data['id']);
-            sendMail($this->data['email'],"Your " . PROJECT_NAME_HR . " submission for ". $this->data['url']. " was rejected",$this->data['rejectreason']);
+        if (empty($this->data['id'])) {
+            throw new Exception('Invalid id.');
         }
 
-        return $this->tple->get();
-    }
+        if (!array_key_exists('confirm', $this->data)
+            || $this->data['confirm'] != 'really'
+        ) {
+            $this->tple->setVariable('id', (int)$this->data['id']);
+            $this->tple->parse('sub.reject');
+            return $this->tple->get();
+        }
 
-    protected function sendMail($to, $subject, $text)
-    {
-        $header = "From: " . PROJECT_ADMIN_EMAIL . "\r\n";
-        mail($to, $subject, $text, $header);
+        try {
+
+            $this->Admin->rejectSubmission($this->data['id']);
+
+            $data = $this->Admin->getSubmission($this->data['id']);
+            $this->sendMail(
+                $data['email'],
+                'Your ' . PROJECT_NAME_HR . ' submission was rejected',
+                'Please make sure you comply with the rules.'
+            );
+
+        } catch (Exception $e) {
+            $this->tple->setVariable('error', $e->getMessage());
+            return $this->tple->get();
+        }
+
+        $this->redirect();
     }
 
     public function clearCache()
@@ -176,9 +192,24 @@ class Controller_Admin extends Controller
             );
 
             if (!$this->auth->checkAuth()) {
+
+                /**
+                 * Login form
+                 */
+                $this->tple->loadTemplatefile('admin-login.tpl', true, true);
                 $page = $this->login();
+
             } else {
+
+                /**
+                 * Initialize template
+                 */
+                $this->tple->loadTemplatefile('admin.tpl', true, true);
+                $this->tple->setVariable('base_url', PLANET_BASE_URL);
+
                 $page = call_user_func(array($this, $this->action));
+                $page = $this->tple->get();
+
             }
         } catch (Exception $e) {
             die($e->getMessage());
@@ -190,5 +221,10 @@ class Controller_Admin extends Controller
     public function getCacheName()
     {
         return null;
+    }
+
+    protected function redirect($url = null)
+    {
+        parent::redirect("admin/$url");
     }
 }

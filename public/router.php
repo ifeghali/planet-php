@@ -15,9 +15,13 @@ try {
     $m->connect('submit', array('controller' => 'submit', 'action' => 'index'));
     $m->connect('submit/add', array('controller' => 'submit', 'action' => 'add'));
     $m->connect('admin', array('controller' => 'admin', 'action' => 'index'));
+    $m->connect('admin/add', array('controller' => 'admin', 'action' => 'add'));
     $m->connect('admin/promote/:id', array('controller' => 'admin', 'action' => 'promote'));
-    $m->connect('admin/delete/:id', array('controller' => 'admin', 'action' => 'deleteFeed'));
-    $m->connect('admin/delete/:confirm/:id', array('controller' => 'admin', 'action' => 'deleteFeed'));
+    $m->connect('admin/delete/:id', array('controller' => 'admin', 'action' => 'delete'));
+    $m->connect('admin/delete/:confirm/:id', array('controller' => 'admin', 'action' => 'delete'));
+    $m->connect('admin/reject/:id', array('controller' => 'admin', 'action' => 'reject'));
+    $m->connect('admin/reject/:confirm/:id', array('controller' => 'admin', 'action' => 'reject'));
+    $m->connect('admin/logout', array('controller' => 'admin', 'action' => 'logout'));
     $m->connect('atom', array('controller' => 'feed', 'action' => 'atom'));
     $m->connect('atom/:hash', array('controller' => 'feed', 'action' => 'atom'));
     $m->connect('rss', array('controller' => 'feed', 'action' => 'rss'));
