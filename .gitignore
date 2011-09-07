@@ -3,7 +3,7 @@ tmp
 s9y
 s9y.
 config/config.inc.php
-config/config-admin.php
+config/config-admin.inc.php
 config/admin-passwd
 public/info.php
 .swp
