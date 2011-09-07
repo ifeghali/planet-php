@@ -1,8 +1,17 @@
 <?php
 /**
- * @category Feed
- * @package  Planet-PHP
- * @author   Till Klampaeckel <till@php.net>
+ * Planet PHP
+ *
+ * Feed model
+ *
+ * PHP version 5
+ *
+ * @package    Planet_PHP
+ * @author     Till Klampaeckel <till@php.net>
+ * @author     Igor Feghali <ifeghali@php.net>
+ * @copyright  2011 The Authors
+ * @license    http://opensource.org/licenses/MIT The MIT License
+ * @link       http://github.com/ifeghali/planet-php/
  */
 class Model_Feed extends Model 
 {

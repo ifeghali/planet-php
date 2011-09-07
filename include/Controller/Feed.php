@@ -1,4 +1,18 @@
 <?php
+/**
+ * Planet PHP
+ *
+ * Feed controller 
+ *
+ * PHP version 5
+ *
+ * @package    Planet_PHP
+ * @author     Till Klampaeckel <till@php.net>
+ * @author     Igor Feghali <ifeghali@php.net>
+ * @copyright  2011 The Authors
+ * @license    http://opensource.org/licenses/MIT The MIT License
+ * @link       http://github.com/ifeghali/planet-php/
+ */
 class Controller_Feed extends Controller
 {
     protected $name = 'Feed';

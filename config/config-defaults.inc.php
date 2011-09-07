@@ -1,9 +1,22 @@
 <?php
 /**
+ * Planet PHP
+ *
  * This is a defaults configuration to ease configuration.
  *
  * You should not edit anything in here, just override the constants in
  * config.inc.php instead.
+ *
+ * PHP version 5
+ *
+ * @package    Planet_PHP
+ * @author     Till Klampaeckel <till@php.net>
+ * @author     Igor Feghali <ifeghali@php.net>
+ * @copyright  2011 The Authors
+ * @license    http://opensource.org/licenses/MIT The MIT License
+ * @link       http://github.com/ifeghali/planet-php/
+ */
+/**
  *
  * @author Till Klampaeckel <till@php.net>
  */

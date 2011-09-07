@@ -1,4 +1,19 @@
 <?php
+/**
+ * Planet PHP
+ *
+ * Used in the aggregator script
+ *
+ * PHP version 5
+ *
+ * @package    Planet_PHP
+ * @author     Christian Stocker <me@chregu.tv>
+ * @author     Till Klampaeckel <till@php.net>
+ * @copyright  2011 The Authors
+ * @license    http://opensource.org/licenses/MIT The MIT License
+ * @link       http://github.com/ifeghali/planet-php/
+ */
+
 require_once 'utf2entities.php';
 require_once 'magpierss/rss_fetch.inc';
 

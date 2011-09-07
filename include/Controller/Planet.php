@@ -1,6 +1,18 @@
 <?php
 /**
- * @author Till Klampaeckel <till@php.net>
+ * Planet PHP
+ *
+ * Planet controller
+ *
+ * PHP version 5
+ *
+ * @package    Planet_PHP
+ * @author     Till Klampaeckel <till@php.net>
+ * @author     Christian Weiske <cweiske@cweiske.de>
+ * @author     Igor Feghali <ifeghali@php.net>
+ * @copyright  2011 The Authors
+ * @license    http://opensource.org/licenses/MIT The MIT License
+ * @link       http://github.com/ifeghali/planet-php/
  */
 class Controller_Planet extends Controller
 {

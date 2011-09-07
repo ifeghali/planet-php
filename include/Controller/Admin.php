@@ -1,4 +1,20 @@
 <?php
+/**
+ * Planet PHP
+ *
+ * Admin controller
+ *
+ * PHP version 5
+ *
+ * @package    Planet_PHP
+ * @author     Christian Stocker <me@chregu.tv>
+ * @author     Christian Weiske <cweiske@cweiske.de>
+ * @author     Till Klampaeckel <till@php.net>
+ * @author     Igor Feghali <ifeghali@php.net>
+ * @copyright  2011 The Authors
+ * @license    http://opensource.org/licenses/MIT The MIT License
+ * @link       http://github.com/ifeghali/planet-php/
+ */
 class Controller_Admin extends Controller
 {
     protected $name     = 'Admin';

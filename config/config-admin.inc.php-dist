@@ -1,4 +1,18 @@
 <?php
+/**
+ * Planet PHP
+ *
+ * Config file for planet administration
+ *
+ * PHP version 5
+ *
+ * @package    Planet_PHP
+ * @author     Christian Weiske <cweiske@cweiske.de>
+ * @author     Igor Feghali <ifeghali@php.net>
+ * @copyright  2011 The Authors
+ * @license    http://opensource.org/licenses/MIT The MIT License
+ * @link       http://github.com/ifeghali/planet-php/
+ */
 
 /**
  * PEAR karma
