@@ -61,7 +61,7 @@
      <label for="rss">Your RSS/Atom URL:</label><input id="rss" value="" name="rss"/> (to the PHP cat only) <br/>
      Why should your blog be on Planet PHP:<br/> <textarea name="description" id="description" cols="40" rows="10"></textarea><br/>
      <br/>
-     <label for="rss">What's the first name of the inventor of PHP?</label><input id="firstname" value="" name="firstname"/> <br/>
+     <label for="rss">What's the first name of the inventor of PHP?</label><input id="challenge" value="" name="challenge"/> <br/>
      <br/>
      <label for="submit"> </label><input type="submit" value="send"/>
     </form>

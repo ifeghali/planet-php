@@ -27,7 +27,7 @@ class Controller_Submit extends Controller
     public function add()
     {
         if (empty($this->data['name'])
-            || empty($this->data['firstname'])
+            || empty($this->data['challenge'])
             || empty($this->data['url'])
             || empty($this->data['description'])
         ) {
@@ -43,7 +43,7 @@ class Controller_Submit extends Controller
             || strpos($this->data['rss'],'http://') !== 0
             || strpos($this->data['url'],'<') !== false
             || strpos($this->data['rss'],'<') !== false 
-            || strtolower($this->data['firstname']) != 'rasmus'
+            || strtolower($this->data['challenge']) != 'rasmus'
             || !empty($this->data['url2'])
         ) {
             die('You look like a spammer...');
