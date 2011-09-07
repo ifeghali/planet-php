@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription
+ xmlns="http://a9.com/-/spec/opensearch/1.1/"
+ xmlns:moz="http://www.mozilla.org/2006/browser/search/"
+>
+ <ShortName>Planet PHP Rio</ShortName>
+ <LongName>Planet PHP Rio feed search</LongName>
+ <Description>Finds PHP Rio blog posts</Description>
+ <Tags>php rio ug planet blog post</Tags>
+ <Developer>Christian Weiske</Developer>
+ <Contact>cweiske@php.net</Contact>
+ <Url type="text/html" 
+  template="http://planet.phprio.org/search/{searchTerms}"/>
+ <Image height="16" width="16" type="image/vnd.microsoft.icon">http://planet.phprio.org/themes/planet-phprio/favicon.ico</Image>
+ <Query role="example" searchTerms="MDB2" />
+ <SyndicationRight>open</SyndicationRight>
+ <AdultContent>false</AdultContent>
+ <Language>en-us</Language>
+ <OutputEncoding>UTF-8</OutputEncoding>
+ <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription>
