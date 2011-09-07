@@ -1,14 +1,14 @@
-ABOUT
-*****
+PLANET PHP
+==========
 
 This is planet-php, a web interface with feed aggregation functionalities.
 
-PREQUISITES
-***********
+
+PREREQUISITES
+-------------
 
 PHP Dependencies:
 - PHP 5
-- The tidy extension (optional, if you don't want to tidy it, just comment it out in the sitemap)
 - A database (only tested with mysql, but should work with others, too)
 
 PEAR Packages:
@@ -23,33 +23,48 @@ Others:
 
 
 INSTALLATION
-************
+------------
 
-git clone git://github.com/ifeghali/planet-php.git
-cp config/config.inc.php-dist config/config.inc.php
+1. Get the latest code from GitHub
 
-- adjust the dsn parameter (and other config options if you want)
+    git clone git://github.com/ifeghali/planet-php.git
 
-- make tmp directory writeable for the webserver
+2. Adjust the DSN parameter (and other config options if you want)
 
-- import the db from config/database.sql (this is a dump from mysql)
+    cp config/config.inc.php-dist config/config.inc.php
 
-- add feeds to feeds table
+3. Make tmp directory writeable for the webserver
 
-- to import the entries run the ./scripts/aggregate.php script
+3. Import the DB from config/database.sql (this is a dump from mysql)
 
-- open the page ;)
+    mysql < config/database.sql
 
-- Add a crontab:
-   */5 * * * * /path/to/php-cli /path/to/planet-code/scripts/aggregate.php
+4. Add a privileged user (for database authentication only)
+
+    echo 'insert into auth values ("admin", md5("pwd"));' | mysql planet
 
 
 ADMINISTRATION
-**************
+--------------
 
-cp config/config-admin.inc.php-dist config/config-admin.inc.php
+1. Create the admin config file
 
-- if you want to authenticate via database, adjust the dsn
+    cp config/config-admin.inc.php-dist config/config-admin.inc.php
 
-- if you want to authenticate via PEAR, comment out the second block
-    of code. uncomment the first block of code.
+- If you want to authenticate via database, adjust the dsn
+
+- If you want to authenticate via PEAR, comment out the second block
+    of code. Uncomment the first block of code.
+
+2. If everything went fine, you can now login to PLANET-URL/admin/
+
+3. Create new feeds using the admin interface
+
+4. To load contents
+
+    ./scripts/aggregate.php
+
+5. Or you can automate the import proccess with a cronjob
+
+    */5 * * * * /path/to/php-cli /path/to/planet-code/scripts/aggregate.php
+
