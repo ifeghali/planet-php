@@ -2,9 +2,9 @@
 <body>
 
 <div class="box">
-<fieldset><legend>Thanks for your submission</legend>
+<fieldset><legend>Obrigado</legend>
 
-One of the administrators will verify your blog and  activate it. This can take some time, usually days not minutes :)
+Um de nossos administradores irá avaliar o seu formulário. Podemos levar alguns dias :)
 
 </fieldset>
 </div>
