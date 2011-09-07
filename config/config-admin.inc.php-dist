@@ -26,6 +26,7 @@
 /**
  * Database
  */
+$ADMIN_config['auth_container'] = 'MDB2';
 $ADMIN_config['auth'] = array(
     'dsn'         => 'mysql://user:passwd@hostname/database',
     'table'       => 'auth',
