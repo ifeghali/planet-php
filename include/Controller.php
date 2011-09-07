@@ -46,7 +46,7 @@ abstract class Controller
 
         try {
             $obj = new $model_class();
-        } catch (RuntimeException $e) {
+        } catch (Exception $e) {
             die("Database error.");
         }
 

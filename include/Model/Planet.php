@@ -34,7 +34,7 @@ class Model_Planet extends Model
         }
 
         if (MDB2::isError($this->db)) {
-            throw new RuntimeException(
+            throw new Exception(
                 $this->db->getUserInfo(),
                 $this->db->getCode()
             );
@@ -48,7 +48,7 @@ class Model_Planet extends Model
      * @param boolean $forceAll Force it to return all blogs, not just the active ones.
      *
      * @return array
-     * @throws RuntimeException In case of an error from MDB2.
+     * @throws Exception In case of an error from MDB2.
      */
     public function getBlogs($section = 'default', $forceAll = false)
     {
@@ -74,7 +74,7 @@ class Model_Planet extends Model
 
         $res = $this->db->queryAll($sql);
         if (MDB2::isError($res)) {
-            throw new RuntimeException($res->getUserInfo(), $res->getCode());
+            throw new Exception($res->getUserInfo(), $res->getCode());
         }
         return $res;
     }
@@ -93,7 +93,7 @@ class Model_Planet extends Model
 
         $res = $this->db->queryAll($sql);
         if (MDB2::isError($res)) {
-            throw new RuntimeException($res->getUserInfo(), $res->getCode());
+            throw new Exception($res->getUserInfo(), $res->getCode());
         }
         return $res;
     }
@@ -105,7 +105,7 @@ class Model_Planet extends Model
      * @param int    $startEntry For the limit query.
      * @param mixed  $query      null with no search, and string if a search is triggered.
      * @return array
-     * @throws RuntimeException In case of an error.
+     * @throws Exception In case of an error.
      */
     public function getEntries($section = 'default', $startEntry = 0, $query = null)
     {
@@ -176,7 +176,7 @@ class Model_Planet extends Model
         LIMIT '. $startEntry . ',' . $tally);
 
         if (MDB2::isError($res)) {
-            throw new RuntimeException($res->getUserInfo(), $res->getCode());
+            throw new Exception($res->getUserInfo(), $res->getCode());
         }
         return $res;
     }
@@ -198,7 +198,7 @@ class Model_Planet extends Model
         $sql   = "SELECT count(*) $from";
         $count = $this->db->queryOne($sql);
         if (MDB2::isError($count)) {
-            throw new RuntimeException($count->getUserInfo(), $count->getCode());
+            throw new Exception($count->getUserInfo(), $count->getCode());
         }
 
         $prevKey = null;

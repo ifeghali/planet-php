@@ -30,7 +30,7 @@ class Model_Submit extends Model
         }
 
         if (MDB2::isError($this->db)) {
-            throw new RuntimeException(
+            throw new Exception(
                 $this->db->getUserInfo(),
                 $this->db->getCode()
             );
@@ -59,7 +59,7 @@ class Model_Submit extends Model
         ));
 
         if (MDB2::isError($res)) {
-            throw new RuntimeException(
+            throw new Exception(
                 $this->db->getUserInfo(),
                 $this->db->getCode()
             );

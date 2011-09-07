@@ -55,7 +55,7 @@ class Controller_Submit extends Controller
 
         try {
             $this->Submit->save($this->data);
-        } catch (RuntimeException $e) {
+        } catch (Exception $e) {
             die('Database error.');
         }
 

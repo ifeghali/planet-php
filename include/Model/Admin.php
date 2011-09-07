@@ -33,7 +33,7 @@ class Model_Admin extends Model
         }
 
         if (MDB2::isError($this->db)) {
-            throw new RuntimeException(
+            throw new Exception(
                 $this->db->getUserInfo(),
                 $this->db->getCode()
             );
