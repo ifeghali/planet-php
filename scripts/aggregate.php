@@ -44,14 +44,16 @@ if (isset($argv[1]) || !empty($argv[1])) {
 $agg = new Aggregator();
 
 /**
+ * remove all cache
+ */
+foreach (glob(BX_TEMP_DIR . 'cache-*') as $file) {
+    unlink($file);
+}
+
+/**
  * do the magic
  */
 $agg->aggregateAllBlogs($blogId);
-if ($agg->isNew() === true) {
-    foreach (glob(BX_TEMP_DIR . 'Planet-*') as $file) {
-        unlink($file);
-    }
-}
 
 /* disable hub notify **********************************************************
 $noti = new lx_notifier();

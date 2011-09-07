@@ -67,7 +67,7 @@ $controller->setData(array_merge(
 ));
 
 $cacheName = $controller->getCacheName();
-$cacheFile = BX_TEMP_DIR . '/' . $cacheName;
+$cacheFile = BX_TEMP_DIR . '/cache-' . strtolower($cacheName);
 
 if (empty($cacheName)) {
 
