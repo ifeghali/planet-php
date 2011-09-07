@@ -7,3 +7,4 @@ config/config-admin.inc.php
 config/admin-passwd
 public/info.php
 .swp
+.DS_Store
